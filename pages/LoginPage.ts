@@ -31,6 +31,7 @@ export class LoginPage {
             waitUntil: 'networkidle',
             timeout: 60000
         });
+        console.log('Navigated to login page: ' + this.page.url());
     }
 
     /* ============= Page State ============= */
@@ -78,6 +79,18 @@ export class LoginPage {
     }
     async isLinkForOrangeWebsiteDisplayed(): Promise<boolean> {
         return await this.locators.linkForOrangeWebsite.isVisible();
+    }
+    async isLinkedinLinkDisplayed(): Promise<boolean> {
+        return await this.locators.linkedinLink.isVisible();
+    }
+    async isFacebookLinkDisplayed(): Promise<boolean> {
+        return await this.locators.facebookLink.isVisible();
+    }
+    async isTwitterLinkDisplayed(): Promise<boolean> {
+        return await this.locators.twitterLink.isVisible();
+    }
+    async isYoutubeLinkDisplayed(): Promise<boolean> {
+        return await this.locators.youtubeLink.isVisible();
     }
 
     /* ============= Form Actions ============= */

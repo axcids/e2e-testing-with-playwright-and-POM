@@ -52,7 +52,7 @@ export class LoginLocators {
     this.copyrightText2 = page.getByText(/All rights reserved./i);
     this.linkForOrangeWebsite = page.getByRole('link', { name: 'OrangeHRM' });
     // Social media links
-    this.linkedinLink = page.getByRole('link', { name: 'LinkedIn' });
+    this.linkedinLink = page.getByRole('link', { name: 'linkedIn' });
     this.facebookLink = page.getByRole('link', { name: 'Facebook' });
     this.twitterLink = page.getByRole('link', { name: 'Twitter' });
     this.youtubeLink = page.getByRole('link', { name: 'YouTube' });
