@@ -123,7 +123,7 @@ test.describe('verify login functionality', () => {
 });
 test.describe('verify footer links', () => {
 
-    //FIX THE REDIRECTIONS
+    //FIX THE
 
 
     test.beforeEach(async ({ page }) => {
