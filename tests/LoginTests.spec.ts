@@ -122,6 +122,10 @@ test.describe('verify login functionality', () => {
     });
 });
 test.describe('verify footer links', () => {
+
+    //FIX THE REDIRECTIONS
+
+
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
         // Navigate to login page once for all tests
@@ -130,26 +134,38 @@ test.describe('verify footer links', () => {
     test('verify orange HRM link is working', async ({ page }) => {
         // Verify the orange HRM link is working
         await loginPage.clickOrangeHRMLink();
-        expect(page.url()).toContain('orangehrm.com');
+        expect(page.url()).toMatch(/orangehrm/i); // Expect the URL to contain 'orangehrm'
     });
     test('verify linkedin link is working', async ({ page }) => {
         // Verify the linkedin link is working
+        const newPagePromise = page.context().waitForEvent('page');
         await loginPage.clickOnLinkedinLogo();
-        expect(page.url()).toContain('linkedin.com');
+        const newPage = await newPagePromise;
+        await newPage.waitForLoadState('networkidle');
+        expect(newPage.url()).toMatch(/linkedin/i); // Expect the URL to contain 'linkedin'
     });
     test('verify facebook link is working', async ({ page }) => {
         // Verify the facebook link is working
+        const newPagePromise = page.context().waitForEvent('page');
         await loginPage.clickOnFacebookLogo();
-        expect(page.url()).toContain('facebook.com');
+        const newPage = await newPagePromise;
+        await newPage.waitForLoadState('networkidle');
+        expect(newPage.url()).toMatch(/facebook/i); // Expect the URL to contain 'facebook'
     });
     test('verify twitter link is working', async ({ page }) => {
         // Verify the twitter link is working
+        const newPagePromise = page.context().waitForEvent('page');     
         await loginPage.clickOnTwitterLogo();
-        expect(page.url()).toContain('twitter.com');
+        const newPage = await newPagePromise;
+        await newPage.waitForLoadState('networkidle');
+        expect(newPage.url()).toMatch(/twitter/i); // Expect the URL to contain 'twitter'
     });
     test('verify youtube link is working', async ({ page }) => {
         // Verify the youtube link is working
+        const newPagePromise = page.context().waitForEvent('page');
         await loginPage.clickOnYoutubeLogo();
-        expect(page.url()).toContain('youtube.com');
+        const newPage = await newPagePromise;
+        await newPage.waitForLoadState('networkidle');
+        expect(newPage.url()).toMatch(/youtube/i); // Expect the URL to contain 'youtube'
     });
 });

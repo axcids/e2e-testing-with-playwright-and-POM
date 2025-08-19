@@ -106,6 +106,11 @@ export class LoginPage {
     async clickLoginButton(): Promise<void> {
         await this.locators.loginButton.click();
     }
+    async loginWithAdminCredentials(): Promise<void> {
+        await this.fillUsername('Admin');
+        await this.fillPassword('admin123');
+        await this.clickLoginButton();
+    }
     async isInvalidCredentialsErrorDisplayed(): Promise<boolean> {
         return await this.locators.invalidCredentialsErrorMessage.isVisible();
     }
