@@ -1,7 +1,7 @@
 import {test, expect, Page} from '@playwright/test';
-import { NavbarLocators } from '../locators/navbarLocators.';
+import { NavbarLocators } from '../../locators/navbarLocators.';
 
-export class NavbarPage {
+export class NavbarFragment {
 
     private locators;
     private page: Page;
@@ -12,6 +12,7 @@ export class NavbarPage {
     }
     /* ============= Page State ============= */
     async isPageTitleDisplayed(): Promise<boolean> {
+        await this.page.waitForTimeout(5000); // Wait for the page to load
         return await this.locators.pageTitle.isVisible();
     }
     async isProfileMenuButtonDisplayed(): Promise<boolean> {

@@ -5,9 +5,14 @@ export class DashboardPage {
 
     locators: DashboardLocators;
     page: Page;
+    baseUrl: string;
+    path: string;
 
     constructor(page: Page) {
         this.locators = new DashboardLocators(page);
+        // initialize base URL and login path
+        this.baseUrl = 'https://opensource-demo.orangehrmlive.com';
+        this.path = '/web/index.php/dashboard/index';
     }
 
     /* ============= Page State ============= */

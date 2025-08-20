@@ -12,7 +12,7 @@ export class NavbarLocators {
 
     constructor(page: Page) {
         this.pageTitle = page.getByRole('heading', { name: 'Dashboard' })
-        this.profileMenuButton = page.locator('span').filter({ hasText: 'Fariya Batool' });
+        this.profileMenuButton = page.getByRole('banner').getByRole('img', { name: 'profile picture' });
         this.dropdownMenu = page.getByText('AboutSupportChange')
         this.aboutMenuItem = page.getByRole('menuitem', { name: 'About' })
         this.supportMenuItem = page.getByRole('menuitem', { name: 'Support' });

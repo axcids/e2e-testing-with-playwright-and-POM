@@ -1,7 +1,7 @@
 import {test, expect, Page} from '@playwright/test';
-import { SidebarLocators } from '../locators/SidebarLocators';
+import { SidebarLocators } from '../../locators/SidebarLocators';
 
-export class SidebarPage {
+export class SidebarFragment {
 
     private locators;
     private page: Page;

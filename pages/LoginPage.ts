@@ -1,44 +1,39 @@
-import {test, expect, Page} from '@playwright/test';
-import { LoginLocators } from '../locators/LoginLocators';
+import {Page} from '@playwright/test';
+import {LoginLocators } from '../locators/LoginLocators';
+import { BasePage } from './BasePage';
 
-
-export class LoginPage {
+export class LoginPage extends BasePage {
 
     /* ============= Page State ============= */
 
     private locators;
-    private page: Page;
-    private baseUrl: string;
-    private loginPath: string;
+    baseUrl: string;
+    path: string;
 
     /* ====== Constructor ====== */
     
     constructor(page: Page) {
-        // Initialize variables
-        // initialize page 
-        this.page = page;
+        super(page);    
         // initialize locators
         this.locators = new LoginLocators(page);
         // initialize base URL and login path
         this.baseUrl = 'https://opensource-demo.orangehrmlive.com';
-        this.loginPath = '/web/index.php/auth/login';
+        this.path = '/web/index.php/auth/login';
     }
 
     /* ============= Page Navigation ============= */
     
     async navigateToLoginPage(): Promise<void> {
-        await this.page.goto(this.baseUrl + this.loginPath, {
+        await this.page.goto(this.baseUrl + this.path, {
             waitUntil: 'networkidle',
             timeout: 60000
         });
-        console.log('Navigated to login page: ' + this.page.url());
     }
-
     /* ============= Page State ============= */
     
     async isLoginPageOpen(): Promise<boolean> {
-        const url = await this.page.url();
-        return url === this.baseUrl + this.loginPath;
+        const url = await this.getPageUrl();
+        return url === this.baseUrl + this.path;
     }
     async isTitleCorrect(): Promise<boolean> {
         const title = await this.page.title();
@@ -105,11 +100,6 @@ export class LoginPage {
     }
     async clickLoginButton(): Promise<void> {
         await this.locators.loginButton.click();
-    }
-    async loginWithAdminCredentials(): Promise<void> {
-        await this.fillUsername('Admin');
-        await this.fillPassword('admin123');
-        await this.clickLoginButton();
     }
     async isInvalidCredentialsErrorDisplayed(): Promise<boolean> {
         return await this.locators.invalidCredentialsErrorMessage.isVisible();
