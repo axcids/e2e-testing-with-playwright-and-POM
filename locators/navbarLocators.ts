@@ -12,8 +12,8 @@ export class NavbarLocators {
 
     constructor(page: Page) {
         this.pageTitle = page.getByRole('heading', { name: 'Dashboard' })
-        this.profileMenuButton = page.getByRole('banner').getByRole('img', { name: 'profile picture' });
-        this.dropdownMenu = page.getByText('AboutSupportChange')
+        this.profileMenuButton = page.locator('img.oxd-userdropdown-img[data-v-bdd6d943][alt="profile picture"]');
+        this.dropdownMenu = page.locator('ul.oxd-dropdown-menu[role="menu"]')
         this.aboutMenuItem = page.getByRole('menuitem', { name: 'About' })
         this.supportMenuItem = page.getByRole('menuitem', { name: 'Support' });
         this.changePasswordMenuItem = page.getByRole('menuitem', { name: 'Change Password' });

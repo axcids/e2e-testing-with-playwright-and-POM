@@ -25,8 +25,8 @@ export class LoginPage extends BasePage {
     
     async navigateToLoginPage(): Promise<void> {
         await this.page.goto(this.baseUrl + this.path, {
-            waitUntil: 'networkidle',
-            timeout: 60000
+            waitUntil: 'domcontentloaded',
+            timeout: 60000 // 60 seconds    
         });
     }
     /* ============= Page State ============= */

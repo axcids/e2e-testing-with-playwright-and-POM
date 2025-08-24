@@ -21,10 +21,17 @@ export class BaseTest{
         await this.loginPage.fillUsername('Admin');
         await this.loginPage.fillPassword('admin123');
         await this.loginPage.clickLoginButton();
-        // await this.verifyLoginSuccess();
-        const currentUrl = await this.page.url();
-        const expectedUrl = this.dashboardPage.baseUrl + this.dashboardPage.path;
-        await expect(currentUrl).toBe(expectedUrl);
+        
+        // Wait for navigation to complete and dashboard to load
+        try {
+            // Wait for URL to change to dashboard URL
+            await this.page.waitForURL(this.dashboardPage.baseUrl + this.dashboardPage.path, { timeout: 10000 });
+            
+            // Wait for a dashboard element to be visible to confirm page load
+            await this.page.waitForSelector('img.oxd-userdropdown-img[alt="profile picture"]', { timeout: 10000 });
+        } catch (error) {
+            throw new Error('Failed to login or navigate to dashboard: ' + error);
+        }
     }
 
 }

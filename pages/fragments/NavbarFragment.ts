@@ -1,5 +1,5 @@
 import {test, expect, Page} from '@playwright/test';
-import { NavbarLocators } from '../../locators/navbarLocators.';
+import { NavbarLocators } from '../../locators/navbarLocators';
 
 export class NavbarFragment {
 
@@ -37,18 +37,35 @@ export class NavbarFragment {
     /* ============= Actions ============= */
     
     async clickProfileMenuButton(): Promise<void> {
-        await this.locators.profileMenuButton.click();
+        await this.locators.profileMenuButton.click();                
     }
     async clickAboutMenuItem(): Promise<void> {
-        await this.locators.aboutMenuItem.click();
+        if(await this.isDropdownMenuDisplayed()){
+            await this.locators.aboutMenuItem.click();
+        }else{
+            throw new Error('Dropdown menu is not displayed');
+        }
     }
     async clickSupportMenuItem(): Promise<void> {
-        await this.locators.supportMenuItem.click();
+        if(await this.isDropdownMenuDisplayed()){
+            await this.locators.supportMenuItem.click();
+        }else{
+            throw new Error('Dropdown menu is not displayed');
+        }
     }
     async clickChangePasswordMenuItem(): Promise<void> {
-        await this.locators.changePasswordMenuItem.click();
+        if(await this.isDropdownMenuDisplayed()){
+            await this.locators.changePasswordMenuItem.click();
+        }else{
+            throw new Error('Dropdown menu is not displayed');
+        }
     }
     async clickLogoutMenuItem(): Promise<void> {
-        await this.locators.logoutMenuItem.click();
+        try {
+            // Find and click the Logout link directly using a more reliable selector
+            await this.locators.logoutMenuItem.click();
+        } catch (error) {
+            throw new Error('Unable to click logout menu item: ' + error);
+        }
     }
 }
