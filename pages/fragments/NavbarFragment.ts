@@ -62,10 +62,8 @@ export class NavbarFragment {
     }
     async clickLogoutMenuItem(): Promise<void> {
         try {
-            // Wait for dropdown menu to be visible
-            await this.page.waitForSelector(this.locators.logoutMenuItem);
             // Find and click the Logout link directly using a more reliable selector
-            await this.page.locator(this.locators.logoutMenuItem).click();
+            await this.locators.logoutMenuItem.click();
         } catch (error) {
             throw new Error('Unable to click logout menu item: ' + error);
         }
